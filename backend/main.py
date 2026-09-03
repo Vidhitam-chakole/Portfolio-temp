@@ -26,6 +26,10 @@ class ContactMessage(BaseModel):
 def read_root():
     return {"status": "ok", "message": "Backend is running"}
 
+@app.get("/api/health")
+def health_check():
+    return {"status": "ok"}
+
 @app.post("/api/contact")
 def send_contact(contact: ContactMessage):
     # This will be implemented to send an email or store in Supabase
