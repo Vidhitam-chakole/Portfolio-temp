@@ -1,6 +1,6 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
-from pydantic import BaseModel
+from pydantic import BaseModel, Field
 from dotenv import load_dotenv
 import os
 
@@ -19,8 +19,8 @@ app.add_middleware(
 )
 
 class ContactMessage(BaseModel):
-    name: str
-    message: str
+    name: str = Field(min_length=1, max_length=80)
+    message: str = Field(min_length=1, max_length=2000)
 
 @app.get("/")
 def read_root():
